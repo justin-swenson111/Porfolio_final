@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+</head>
+<body>
+    <header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="links"></section>
+        <section class="contact-form">
+            <!-- <h1>Contact Me</h1> -->
+            <form  method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required><br><br>
+                <label for="message">Body:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+                <input type="submit" value="Send Message" id="send">
+            </form>
+    </main>
+</body>
+<script>
+    $(document).ready(function() {
+        // Load the links from the JSON file
+        $("#send").click(function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            getEmail(); // Call the function to send the email
+        });
+        function getEmail(){
+            let name = $('#name').val();
+            let email = $('#email').val();
+            let subject = $('#subject').val();
+            let message = $('#message').val();
+            fetch('./email.php', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message
+                }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(data => {
+                console.log('Email script executed successfully:', data);
+            })
+            .catch(error => {
+                console.error('Error executing email script:', error);
+            });
+        }
+        
+    });
+</script>
+</html>
