@@ -23,51 +23,58 @@
         <section class="links"></section>
         <section class="contact-form">
             <!-- <h1>Contact Me</h1> -->
-            <form  method="POST">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required><br><br>
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" name="subject" required><br><br>
-                <label for="message">Body:</label><br>
-                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
-                <input type="submit" value="Send Message" id="send">
+            <form action="https://formspree.io/f/manoerjl" method="POST">
+                <label>
+                    Your name:
+                    <input type="text" id="name" required>
+                </label>
+                <label>
+                    Your email:
+                    <input type="email" id="email">
+                  </label>
+                  <label>
+                    Email subject:
+                    <input type="text" id="subject" required>
+                  </label>
+                  <label>
+                    Your message:
+                    <textarea id="message"></textarea>
+                  </label>
+                  <!-- your other form fields go here -->
+                  <button type="submit" id="send">Send</button>
             </form>
     </main>
 </body>
-<script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
     $(document).ready(function() {
-        // Load the links from the JSON file
+
+        (function(){
+            emailjs.init({
+                publicKey: "Z6o8v9NxTdxRlUiL-",
+            });
+        })();
+
+        function sendEmail() {
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let subject = $("#subject").val();
+            let message = $("#message").val();
+            emailjs.send("default_service", "template_74vwj8q", {
+                subject:subject,
+                sender: name,
+                message: message,
+                email: email
+            }).then(response => alert("Email sent!"),
+            error => alert("FAILED...", error)
+            );
+        }
         $("#send").click(function(event) {
             event.preventDefault(); // Prevent the default form submission
-            getEmail(); // Call the function to send the email
+            sendEmail();
         });
-        function getEmail(){
-            let name = $('#name').val();
-            let email = $('#email').val();
-            let subject = $('#subject').val();
-            let message = $('#message').val();
-            fetch('./email.php', {
-                method: 'POST',
-                body: new URLSearchParams({
-                    name: name,
-                    email: email,
-                    subject: subject,
-                    message: message
-                }),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
-            })
-            .then(data => {
-                console.log('Email script executed successfully:', data);
-            })
-            .catch(error => {
-                console.error('Error executing email script:', error);
-            });
-        }
-        
     });
 </script>
 </html>
