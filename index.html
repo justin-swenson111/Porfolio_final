@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./styles/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
     <header>
         <div>
-            <img src="" alt="">
+            <img src="https://i.postimg.cc/g235MZst/logo-modified.png" alt="">
             <h1>Justin Swenson</h1>
         </div>
         <nav>
@@ -31,18 +35,91 @@
             <article id="skills">
                 <h2>My proficiencies</h2>
                 <div id="carousel">
-
+                    <div id="imgCont1">
+                        <img src="./media/html.png" alt="" id="carImg1">
+                        <img src="./media/css.svg" alt="" id="carImg2">
+                        <img src="./media/js.png" alt="" id="carImg3">
+                    </div>
+                    <div id="imgCont2">
+                        <img src="./media/php.png" alt="" id="carImg4">
+                        <img src="./media/mysql.png" alt="" id="carImg5">
+                        <img src="./media/jquery.png" alt="" id="carImg6">
+                    </div>
+                    <div id="imgCont3">
+                        <img src="./media/python.png" alt="" id="carImg7">
+                        <img src="./media/inventor.png" alt="" id="carImg8">
+                        <img src="./media/fusion360.png" alt="" id="carImg9">
                 </div>
+                <div id="imgCont1">
+                    <img src="./media/html.png" alt="" id="carImg1">
+                    <img src="./media/css.svg" alt="" id="carImg2">
+                    <img src="./media/js.png" alt="" id="carImg3">
+                </div>
+                <div id="imgCont2">
+                    <img src="./media/php.png" alt="" id="carImg4">
+                    <img src="./media/mysql.png" alt="" id="carImg5">
+                    <img src="./media/jquery.png" alt="" id="carImg6">
+                </div>
+            </article>
+            <article id="weather">
+                <h2>Weather API</h2>
             </article>
         </section>
     </main>
     <footer>
         <div id="socials">
-            <a href="">LinkedIn</a>
-            <a href="">GitHub</a>
-            <a href="">Email</a>
+            <a href=""><i class="fa-brands fa-linkedin"></i></a>
+            <a href=""><i class="fa-brands fa-github"></i></a>
+            <a href=""><i class="fa-solid fa-envelope"></i></a>
         </div>
         <p>© 2023 Justin Swenson</p>
     </footer>
+    <script>
+        $(document).ready(function(){
+            //weather API needs to add to HTML
+            if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition((position) => {
+                console.log(position);
+                lon = position.coords.longitude;
+                lat = position.coords.latitude;
+
+                const api = "485bce0b41a66bc22baffb9cb97a68c2";
+
+                // API URL
+                const base =
+                `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&` +
+                `lon=${lon}&appid=${api}`;
+                // Commented out to not use up free requests
+                // fetch(base)
+                // .then((response) => {
+                //     return response.json();
+                // })
+                // .then((data)=>{
+                //     console.log(data);
+                    
+                // })
+            })
+            } 
+            let imgs = [$("#imgCont1"), $("#imgCont2"), $("#imgCont3")];
+            let imgList = ["./media/html.png", "./media/css.svg", "./media/js.png", "./media/php.png", "./media/mysql.png", "./media/jquery.png", "./media/python.png", "./media/inventor.png", "./media/fusion360.png"];
+        
+            function moveImg(){
+                    setInterval(() => {
+                        imgs.forEach((img, index) => {
+                            $("#carousel").animate({ marginLeft: "-=10vw" }, 1000, "linear", function () {
+                                let currentSpace = parseFloat($("#carousel").css("margin-left")) / $(window).width() * 100; // Convert px to vw
+                                if (currentSpace <= -180) { // Reset at -240vw
+                                    $("#carousel").css("margin-left", "0vw");
+                                }
+                            });
+                        });
+                    }, 0);
+            }
+            moveImg(0);
+            moveImg(1);
+            moveImg(2);
+            
+        })
+    </script>
 </body>
 </html>
