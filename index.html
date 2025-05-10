@@ -90,14 +90,54 @@
                 `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&` +
                 `lon=${lon}&appid=${api}`;
                 // Commented out to not use up free requests
-                // fetch(base)
-                // .then((response) => {
-                //     return response.json();
-                // })
-                // .then((data)=>{
-                //     console.log(data);
+                
+                fetch(base)
+                .then((response) => {
+                    alert("Checking weather...");
+                    return response.json();
+                })
+                .then((data)=>{
+                    console.log(data);
+                    let wind = data.wind.speed;
+                    let windDir = data.wind.deg;
+                    let windDirText = "N";
+                    if (windDir > 337.5 || windDir <= 22.5) {
+                        windDirText = "N";
+                    } else if (windDir > 22.5 && windDir <= 67.5) {
+                        windDirText = "NE";
+                    } else if (windDir > 67.5 && windDir <= 112.5) {
+                        windDirText = "E";
+                    } else if (windDir > 112.5 && windDir <= 157.5) {
+                        windDirText = "SE";
+                    } else if (windDir > 157.5 && windDir <= 202.5) {
+                        windDirText = "S";
+                    } else if (windDir > 202.5 && windDir <= 247.5) {
+                        windDirText = "SW";
+                    } else if (windDir > 247.5 && windDir <= 292.5) {
+                        windDirText = "W";
+                    } else if (windDir > 292.5 && windDir <= 337.5) {
+                        windDirText = "NW";
+                    }
+                    let humidity = data.main.humidity;
+                    console.log(wind + "mph", windDir,windDirText, humidity);
+                    let icon1 = data.weather[0].icon
+                    let cont = `<div id="weatherInfo" class="${data.weather[0].main}">
+                        <div id="weatherMain">
+                        <h2>location: ${data.name}, ${data.sys.country}</h2>
+                        <h2>${data.weather[0].description}</h2>
+                        <img src="https://openweathermap.org/img/wn/${icon1}@2x.png" alt="weather icon">
+                        </div>
+                            <div id="weatherDetails">
+                            <h2>Details</h2>
+                            <p>temperature: ${Math.floor((data.main.temp - 273) * 9/5 + 32)}°F</p>
+                            <p>Feels like: ${Math.floor((data.main.feels_like - 273) * 9/5 + 32)}°F</p>
+                            <p>Wind: ${wind} mph ${windDirText}</p>
+                            <p>Humidity: ${humidity}%</p>
+                        </div>
+                        </div>`
+                    $("#weather").append(cont);
                     
-                // })
+                })
             })
             } 
             let imgs = [$("#imgCont1"), $("#imgCont2"), $("#imgCont3")];
