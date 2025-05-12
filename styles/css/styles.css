@@ -5,6 +5,10 @@ body {
   height: auto;
 }
 
+p {
+  font-size: larger;
+}
+
 .contacts {
   display: flex;
   flex-direction: column;
@@ -13,6 +17,13 @@ body {
   padding: 1.5rem;
   margin: 2rem auto;
   width: 95%;
+}
+
+.contactLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .links {
@@ -26,6 +37,14 @@ body {
   background-color: #3e5c76;
   border: 3px solid black;
   border-radius: 2rem;
+}
+.links #socials {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.links #socials a i {
+  font-size: 3rem;
 }
 
 .contact-form {
@@ -61,6 +80,7 @@ body {
 }
 
 header {
+  height: 10vh;
   background-color: #1d2d44;
   display: flex;
   flex-direction: column;
@@ -72,11 +92,12 @@ header div {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
+  height: 100%;
 }
 header div img {
   margin: 1rem;
-  height: 80%;
+  height: 50%;
   width: auto;
 }
 
@@ -193,7 +214,6 @@ footer {
   background-color: #3e5c76;
   color: #f0ebd8;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #skills #carousel {
@@ -224,6 +244,10 @@ footer {
   }
   header div {
     width: 55%;
+    justify-content: start;
+  }
+  header div img {
+    height: 80%;
   }
   nav {
     width: 45%;

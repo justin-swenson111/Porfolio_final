@@ -24,22 +24,25 @@
     </header>
     <main>
         <section class="contacts">
-            <article class="links">
-                <h1>Contact Me</h1>
-                <p>If you would like to get in touch with me, please fill out the form below or reach out to me on my social media accounts.</p>
-                <div id="socials">
-                    <a href=""><i class="fa-brands fa-linkedin"></i></a>
-                    <a href=""><i class="fa-brands fa-github"></i></a>
-                    <a href=""><i class="fa-solid fa-envelope"></i></a>
-                </div>
-            </article>
-            <article id="xkcd">
-                <h1>Random XKCD comic</h1>
-                <img src="https://imgs.xkcd.com/comics/robot.png" alt="xkcd comic" id="xkcdImg">
-                <p id="xkcdAlt">A robot is holding a sign that says "I am a robot".</p>
-            </article>
+            <div class="contactLayout">
+                <article class="links">
+                    <h1>Contact Me</h1>
+                    <p>If you would like to get in touch with me, please fill out the form below or reach out to me on my social media accounts.</p>
+                    <div id="socials">
+                        <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                        <a href=""><i class="fa-brands fa-github"></i></a>
+                        <a href=""><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </article>
+                <article id="xkcd">
+                    <h1>Random XKCD comic</h1>
+                    <img src="https://imgs.xkcd.com/comics/robot.png" alt="xkcd comic" id="xkcdImg">
+                    <p id="xkcdAlt">A robot is holding a sign that says "I am a robot".</p>
+                </article>
+            </div>
+            
             <article class="contact-form">
-                <!-- <h1>Contact Me</h1> -->
+                <h1>Email Me Directly!</h1>
                 <form action="https://formspree.io/f/manoerjl" method="POST">
                     <label>
                         Your name:
@@ -107,6 +110,20 @@
             event.preventDefault(); // Prevent the default form submission
             sendEmail();
         });
+
+        function getRandomComic() {
+            let num = Math.floor(Math.random() * 2500);
+            let proxyUrl = "https://cors-anywhere.herokuapp.com/";
+            let url = proxyUrl + `https://xkcd.com/${num}/info.0.json`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    $("#xkcdImg").attr("src", data.img);
+                    $("#xkcdAlt").text(data.alt);
+                })
+                .catch(error => console.error("Error fetching XKCD comic:", error));
+        }
+        getRandomComic();
     });
 </script>
 </html>
