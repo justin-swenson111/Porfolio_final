@@ -81,7 +81,7 @@ article{
 #weatherInfo{
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: start;
     padding: 1rem;
     margin: 2rem auto;
     width: 95%;
@@ -91,10 +91,10 @@ article{
 #weatherMain{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: start;
-    padding: 1rem;
-    margin: 2rem auto;
+    padding: 1px;
+    margin: 1rem auto;
     width: 95%;
 }
 #weatherDetails{
