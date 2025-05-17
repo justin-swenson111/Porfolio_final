@@ -17,7 +17,7 @@
             <h1>Contact Me!</h1>
         </div>
         <nav>
-            <a href="projects.html">projects</a>
+            <a href="projects.html">Projects</a>
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
         </nav>
@@ -34,10 +34,8 @@
                         <a href=""><i class="fa-solid fa-envelope"></i></a>
                     </div>
                 </article>
-                <article id="xkcd">
-                    <h1>Random XKCD comic</h1>
-                    <img src="https://imgs.xkcd.com/comics/robot.png" alt="xkcd comic" id="xkcdImg">
-                    <p id="xkcdAlt">A robot is holding a sign that says "I am a robot".</p>
+                <article id="API">
+
                 </article>
             </div>
             
@@ -111,19 +109,6 @@
             sendEmail();
         });
 
-        function getRandomComic() {
-            let num = Math.floor(Math.random() * 2500);
-            let proxyUrl = "https://cors-anywhere.herokuapp.com/";
-            let url = proxyUrl + `https://xkcd.com/${num}/info.0.json`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    $("#xkcdImg").attr("src", data.img);
-                    $("#xkcdAlt").text(data.alt);
-                })
-                .catch(error => console.error("Error fetching XKCD comic:", error));
-        }
-        getRandomComic();
     });
 </script>
 </html>

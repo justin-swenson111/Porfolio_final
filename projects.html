@@ -22,5 +22,98 @@
             <a href="contact.html">Contact</a>
         </nav>
     </header>
+    <main>
+        <section class="webproj">
+            <h1>Web Projects</h1>
+            <div id="carousel" class="webCarousel">
+                <article class="proj">
+                    <h2>Project 1</h2>
+                    <img src="./media/GameTracker.png" alt="">
+                    <p>Description of project 1.</p>
+                    <a href="https://justin-swenson111.github.io/ultimate_game_tracker/" target="_blank">View Project</a>
+                </article>
+                <article class="proj">
+                    <h2>Project 2</h2>
+                    <div class="poke">
+                        <img src="./media/Poke1.png" alt="">
+                        <img src="./media/Poke2.png" alt="">
+                    </div>
+                    <p>Description of project 2.</p>
+                    <a href="https://example.com">View Project</a>
+                </article>
+
+            </div>
+            <button id="move">switch</button>
+        </section>
+        <section class="cadProj">
+
+        </section>
+    </main>
 </body>
+<script>
+    $(document).ready(function() {
+        let elems = [
+            '<h2>Project 1</h2><img src="./media/GameTracker.png" alt=""><p>Description of project 1.</p><a href="https://justin-swenson111.github.io/ultimate_game_tracker/" target="_blank">View Project</a>',
+            '<h2>Project 2</h2><div class="poke"><img src="./media/Poke1.png" alt=""><img src="./media/Poke2.png" alt=""></div><p>Description of project 2.</p><a href="https://example.com">View Project</a>',
+            '<h2>Project 1</h2><img src="./media/PortfolioFBLA.png" alt=""><p>Description of project 1.</p>',
+
+        ]
+
+        let inter = null;
+        function moveImg() {
+            if (!inter) { // Prevent multiple intervals
+            inter = setInterval(() => {
+                $("#carousel").animate({ marginLeft: "-=10vw" }, 500, "linear", function () {
+                let currentSpace = parseFloat($("#carousel").css("margin-left")) / $(window).width() * 100; // Convert px to vw
+                if (currentSpace <= -50) { // Reset at -50vw
+                    stopImg();
+                }
+                });
+            }, 0);
+            }
+        }
+        $("#move").click(function() {
+            if (inter == null) {
+            moveImg();
+            }
+        });
+
+        function stopImg() {
+            for (let i in elems) {
+                if ($("#carousel").children().first().html().replace(/\s+/g, '')==elems[i].replace(/\s+/g, '')) {
+                    if (i!=2){
+                        $("#carousel").children().first().children().remove();
+                        $("#carousel").children().first().append(elems[parseInt(i)+1]);
+                        $("#carousel").children().eq(1).children().remove();
+                        if (i==1){
+                            $("#carousel").children().eq(1).append(elems[0]);
+                        }
+                        else{
+                            $("#carousel").children().eq(1).append(elems[2]);
+                        }
+                        // alert(i)
+                        break
+                    }
+                    else{
+                        $("#carousel").children().first().children().remove();
+                        $("#carousel").children().first().append(elems[0]);
+                        $("#carousel").children().eq(1).children().remove();
+                            $("#carousel").children().eq(1).append(elems[1]);
+
+
+
+                        // alert(i)
+                        break
+                    }
+                }
+
+            }
+
+            $("#carousel").css("margin-left", "0vw");
+            $("#carousel").stop(true, true); // Stop the animation immediately
+            clearInterval(inter);
+            inter = null;
+        }
+    });
+</script>
 </html>

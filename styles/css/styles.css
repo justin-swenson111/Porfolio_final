@@ -22,7 +22,7 @@ p {
 .contactLayout {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 
@@ -51,6 +51,7 @@ p {
   display: flex;
   justify-content: start;
   align-items: start;
+  flex-direction: column;
   padding: 1rem;
   margin: 2rem auto;
   min-width: 70%;
@@ -77,6 +78,43 @@ p {
   background-color: #748cab;
   border: 2px solid black;
   border-radius: 1rem;
+}
+
+.webproj {
+  margin: auto;
+  width: 50vw;
+  overflow: hidden;
+}
+
+.proj {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.proj img {
+  height: 75%;
+  width: auto;
+}
+
+.poke {
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.poke img {
+  width: 40%;
+  height: auto;
+}
+
+.webCarousel {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+.webCarousel article {
+  flex: 0 0 100%;
 }
 
 header {
@@ -188,7 +226,6 @@ nav a {
 }
 
 i {
-  font-size: 2.5rem;
   color: black;
   text-decoration: none;
 }
@@ -199,6 +236,18 @@ footer {
   border-top: 4px solid black;
   justify-content: space-evenly;
   padding: 1rem;
+  align-items: center;
+}
+footer #socials {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  margin: 2rem auto;
+  width: 75%;
+}
+footer #socials a i {
+  font-size: 3rem;
 }
 
 #desc {
@@ -264,5 +313,24 @@ footer {
   .contacts {
     align-items: start;
     justify-content: start;
+  }
+  .contacts .contactLayout {
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+  }
+  footer {
+    justify-content: space-evenly;
+  }
+  footer #socials {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  footer #socials a i {
+    font-size: 3rem;
   }
 }/*# sourceMappingURL=styles.css.map */
