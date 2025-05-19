@@ -74,7 +74,18 @@ p {
 .links #socials a i {
   font-size: 3rem;
 }
+.links #socials a i:hover {
+  animation: forwards iHover 0.5s;
+}
 
+@keyframes iHover {
+  0% {
+    color: black;
+  }
+  100% {
+    color: #687d97;
+  }
+}
 .contact-form {
   display: flex;
   justify-content: start;
@@ -102,10 +113,15 @@ p {
 }
 .contact-form form .emailInp {
   width: 85%;
+  max-width: 90%;
   height: 5vh;
   background-color: #748cab;
   border: 2px solid black;
   border-radius: 1rem;
+}
+
+#next:hover, #move:hover {
+  animation: forwards buttonHover 0.5s;
 }
 
 #send {
@@ -118,7 +134,20 @@ p {
   padding: 0.5rem;
   font-size: x-large;
 }
+#send:hover {
+  animation: forwards buttonHover 0.5s;
+}
 
+@keyframes buttonHover {
+  0% {
+    background-color: #748cab;
+    color: #000000;
+  }
+  100% {
+    background-color: #687d97;
+    color: #f0ebd8;
+  }
+}
 .webproj {
   margin: auto;
   margin-top: 10vh;
