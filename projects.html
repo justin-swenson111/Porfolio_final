@@ -25,53 +25,101 @@
     <main>
         <section class="webproj">
             <h1>Web Projects</h1>
+            <div class="webStyle">
+            <div class="hide">
             <div id="carousel" class="webCarousel">
                 <article class="proj">
-                    <h2>Project 1</h2>
+                    <h2>Game Tracker</h2>
                     <img src="./media/GameTracker.png" alt="">
-                    <p>Description of project 1.</p>
+                    <p>A project that uses Maps and Objects to store user information on performance in multiple events in a game tournament</p>
                     <a href="https://justin-swenson111.github.io/ultimate_game_tracker/" target="_blank">View Project</a>
                 </article>
                 <article class="proj">
-                    <h2>Project 2</h2>
+                    <h2>Poke Dex</h2>
                     <div class="poke">
                         <img src="./media/Poke1.png" alt="">
                         <img src="./media/Poke2.png" alt="">
                     </div>
-                    <p>Description of project 2.</p>
+                    <p>A project that showcases API usage allowing users to view and search for Pokémon data</p>
                     <a href="https://example.com">View Project</a>
                 </article>
 
             </div>
-            <button id="move">switch</button>
+            </div>
+            <button id="move">Next</button>
+        </div>
         </section>
         <section class="cadProj">
-
+            <h1>CAD Projects</h1>
+            <div class="webStyle">
+                <div class="hide">
+                    <div id="CADcarousel" class="webCarousel">
+                        <article class="proj">
+                            <h2>Model Train</h2>
+                            <img src="./media/project3(1).jpg" alt="1">
+                            <p>A model train that demonstrates connections between different parts of a 3d model</p>
+                        </article>
+                        <article class="proj">
+                            <h2>Automata</h2>
+                            <img src="./media/project4(1).jpg" alt="2">
+                            <p>A project that showcases the use of cams to translate rotational motion to linear motion</p>
+                        </article>
+                </div>
+            </div>
+            <button id="next">Next</button>
+        </div>
         </section>
+
+        <footer>
+            <div id="socials">
+                <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                <a href=""><i class="fa-brands fa-github"></i></a>
+                <a href=""><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <p>© 2023 Justin Swenson</p>
+        </footer>
     </main>
 </body>
 <script>
     $(document).ready(function() {
         let elems = [
-            '<h2>Project 1</h2><img src="./media/GameTracker.png" alt=""><p>Description of project 1.</p><a href="https://justin-swenson111.github.io/ultimate_game_tracker/" target="_blank">View Project</a>',
-            '<h2>Project 2</h2><div class="poke"><img src="./media/Poke1.png" alt=""><img src="./media/Poke2.png" alt=""></div><p>Description of project 2.</p><a href="https://example.com">View Project</a>',
-            '<h2>Project 1</h2><img src="./media/PortfolioFBLA.png" alt=""><p>Description of project 1.</p>',
-
+            '<h2>Game Tracker</h2><img src="./media/GameTracker.png" alt=""><p>A project that uses Maps and Objects to store user information on performance in multiple events in a game tournament</p><a href="https://justin-swenson111.github.io/ultimate_game_tracker/" target="_blank">View Project</a>',
+            '<h2>Poke Dex</h2><div class="poke"><img src="./media/Poke1.png" alt=""><img src="./media/Poke2.png" alt=""></div><p>A project that showcases API usage allowing users to view and search for Pokémon data</p><a href="https://example.com">View Project</a>',
+            '<h2>NEC Careers</h2><img src="./media/PortfolioFBLA.png" alt=""><p>A job apllication project utilizing php and MySQL to store user information and create connections between different users.</p>',
+        ]
+        let CADelems = [
+            '<h2>Model Train</h2><img src="./media/project3(1).jpg" alt="1"><p>A model train that demonstrates connections between different parts of a 3d model</p>',
+            '<h2>Automata</h2><img src="./media/project4(1).jpg" alt="2"><p>A project that showcases the use of cams to translate rotational motion to linear motion</p>',
+            '<h2>Lightsaber</h2><img src="./media/LightsaberAssembly.png" alt=""><p>A custom model Lightsaber using many different techniques to create a complex design</p>',
         ]
 
         let inter = null;
+        let CADinter = null;
         function moveImg() {
             if (!inter) { // Prevent multiple intervals
             inter = setInterval(() => {
-                $("#carousel").animate({ marginLeft: "-=10vw" }, 500, "linear", function () {
+                let speed = "-=15vw"
+                if ($(window).width() <= 768) { // Check for mobile
+                    speed = "-=20vw"; // Increase speed for mobile
+                }
+                $("#carousel").animate({ marginLeft: speed }, 500, "linear", function () {
                 let currentSpace = parseFloat($("#carousel").css("margin-left")) / $(window).width() * 100; // Convert px to vw
-                if (currentSpace <= -50) { // Reset at -50vw
-                    stopImg();
+                if ($(window).width() <= 768) { // Check for mobile
+                    console.log(currentSpace);
+                    if (currentSpace <= -140) { // Reset at -100vw for mobile
+                        stopImg();
+                    }
+                }
+                else {
+                    if (currentSpace <= -100) { // Reset at -50vw for larger screens
+                        stopImg();
+                    }
                 }
                 });
             }, 0);
             }
         }
+        
         $("#move").click(function() {
             if (inter == null) {
             moveImg();
@@ -114,6 +162,77 @@
             clearInterval(inter);
             inter = null;
         }
+
+        function moveCADImg() {
+            if (!CADinter) { // Prevent multiple intervals
+            CADinter = setInterval(() => {
+                let speed = "-=15vw"
+                if ($(window).width() <= 768) { // Check for mobile
+                    speed = "-=20vw"; // Increase speed for mobile
+                }
+                $("#CADcarousel").animate({ marginLeft: speed }, 500, "linear", function () {
+                let currentSpace = parseFloat($("#CADcarousel").css("margin-left")) / $(window).width() * 100; // Convert px to vw
+                if ($(window).width() <= 768) { // Check for mobile
+                    console.log(currentSpace);
+                    if (currentSpace <= -140) { // Reset at -100vw for mobile
+                        stopCADImg();
+                    }
+                }
+                else {
+                    if (currentSpace <= -100) { // Reset at -50vw for larger screens
+                        stopCADImg();
+                    }
+                }
+                });
+            }, 0);
+            }
+        }
+
+        function stopCADImg() {
+            for (let i in CADelems) {
+                if ($("#CADcarousel").children().first().html().replace(/\s+/g, '')==CADelems[i].replace(/\s+/g, '')) {
+                    if (i!=2){
+                        $("#CADcarousel").children().first().children().remove();
+                        $("#CADcarousel").children().first().append(CADelems[parseInt(i)+1]);
+                        $("#CADcarousel").children().eq(1).children().remove();
+                        if (i==1){
+                            $("#CADcarousel").children().eq(1).append(CADelems[0]);
+                        }
+                        else{
+                            $("#CADcarousel").children().eq(1).append(CADelems[2]);
+                        }
+                        // alert(i)
+                        break
+                    }
+                    else{
+                        $("#CADcarousel").children().first().children().remove();
+                        $("#CADcarousel").children().first().append(CADelems[0]);
+                        $("#CADcarousel").children().eq(1).children().remove();
+                        $("#CADcarousel").children().eq(1).append(CADelems[1]);
+
+
+
+                        // alert(i)
+                        break
+                    }
+                }
+
+            }
+
+            $("#CADcarousel").css("margin-left", "0vw");
+            $("#CADcarousel").stop(true, true); // Stop the animation immediately
+            clearInterval(CADinter);
+            CADinter = null;
+        }
+
+        $("#next").click(function() {
+            if (CADinter == null) {
+            moveCADImg();
+            }
+        });
+
+        
+
     });
 </script>
 </html>
