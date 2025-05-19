@@ -5,6 +5,30 @@ body{
     height: auto;
 
 }
+@keyframes headerMove {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes mainEnter {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+    
+}
+header{
+    animation: forwards headerMove 1s;
+}
+main{
+    animation: forwards mainEnter 1s;
+
+}
 p{
     font-size: larger;
 }
@@ -91,6 +115,7 @@ p{
 }
     .webproj{
         margin: auto;
+        margin-top: 10vh;
         width: 80vw;
         overflow: hidden;
 
