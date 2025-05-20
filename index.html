@@ -29,7 +29,7 @@
                 <img src="./media/mecwest.png" alt="Picture of me" class="me">
                 <p>Im Justin Swenson, a beginner web designer and CAD develeoper. I have experience working with HTML, CSS, JavaScript and jQuery to create interactive and dynamic webpages.
                 <br><br> 
-                I have some experience working with php and mySQL, and firebase to create functional back-ends to websites.
+                I have some experience working with php and mySQL, and firebase to create functional back-ends to websites. Including basic login systems and data storage with relationships between data and users.
                 <br><br>
                 I additionally work in autodesk inventor and fusion 360 to develop fully functional 3D modeled projects.</p>
             </article>
@@ -73,11 +73,12 @@
             <a href=""><i class="fa-brands fa-github"></i></a>
             <a href=""><i class="fa-solid fa-envelope"></i></a>
         </div>
-        <p>© 2023 Justin Swenson</p>
+        <p>© 2025 justin Swenson</p>
     </footer>
     <script>
         $(document).ready(function(){
             //weather API needs to add to HTML
+            // if location is given
             if (navigator.geolocation){
                 navigator.geolocation.getCurrentPosition((position) => {
                 console.log(position);
@@ -85,13 +86,12 @@
                 lat = position.coords.latitude;
 
                 const api = "485bce0b41a66bc22baffb9cb97a68c2";
-
+                // find location and use that in the fetch
                 // API URL
                 const base =
                 `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&` +
                 `lon=${lon}&appid=${api}`;
-                // Commented out to not use up free requests
-                
+
                 fetch(base)
                 .then((response) => {
                     // alert("Checking weather...");
@@ -122,11 +122,12 @@
                     let humidity = data.main.humidity;
                     console.log(wind + "mph", windDir,windDirText, humidity);
                     let icon1 = data.weather[0].icon
-                    let cont = `<div id="weatherInfo" class="${data.weather[0].main}">
+                    // get all the data from the API
+                    let cont = `<div id="weatherInfo" >
                         <div id="weatherMain">
                         <h2>location: ${data.name}, ${data.sys.country}</h2>
                         <h2>${data.weather[0].description}</h2>
-                        <img src="https://openweathermap.org/img/wn/${icon1}@2x.png" alt="weather icon">
+                        <img src="https://openweathermap.org/img/wn/${icon1}@2x.png" alt="weather icon" class="${data.weather[0].main}">
                         </div>
                             <div id="weatherDetails">
                             <h2>Details</h2>
@@ -136,11 +137,14 @@
                             <p>Humidity: ${humidity}%</p>
                         </div>
                         </div>`
+                        // add it to the HTML
                     $("#weather").append(cont);
+                    // append the content to the HTML
                     
                 })
             })
             } 
+            // list of images to be used in the carousel and their containers
             let imgs = [$("#imgCont1"), $("#imgCont2"), $("#imgCont3")];
             let imgList = ["./media/html.png", "./media/css.svg", "./media/js.png", "./media/php.png", "./media/mysql.png", "./media/jquery.png", "./media/python.png", "./media/inventor.png", "./media/fusion360.png"];
         
@@ -151,6 +155,7 @@
                                 let currentSpace = parseFloat($("#carousel").css("margin-left")) / $(window).width() * 100; // Convert px to vw
                                 if (currentSpace <= -180) { // Reset at -240vw
                                     $("#carousel").css("margin-left", "0vw");
+                                    // reset the images position when they ger to -180 vw left
                                 }
                             });
                         });

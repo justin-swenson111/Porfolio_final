@@ -76,12 +76,13 @@
                 <a href=""><i class="fa-brands fa-github"></i></a>
                 <a href=""><i class="fa-solid fa-envelope"></i></a>
             </div>
-            <p>© 2023 Justin Swenson</p>
+            <p>© 2025 justin Swenson</p>
         </footer>
     </main>
 </body>
 <script>
     $(document).ready(function() {
+        // list of elements to be cycled through
         let elems = [
             '<h2>Game Tracker</h2><img src="./media/GameTracker.png" alt=""><p>A project that uses Maps and Objects to store user information on performance in multiple events in a game tournament</p><a href="https://justin-swenson111.github.io/ultimate_game_tracker/" target="_blank">View Project</a>',
             '<h2>Poke Dex</h2><div class="poke"><img src="./media/Poke1.png" alt=""><img src="./media/Poke2.png" alt=""></div><p>A project that showcases API usage allowing users to view and search for Pokémon data</p><a href="https://example.com">View Project</a>',
@@ -95,23 +96,26 @@
 
         let inter = null;
         let CADinter = null;
+        // setting the variables that will be used to store the intervals
         function moveImg() {
             if (!inter) { // Prevent multiple intervals
             inter = setInterval(() => {
                 let speed = "-=15vw"
                 if ($(window).width() <= 768) { // Check for mobile
-                    speed = "-=20vw"; // Increase speed for mobile
+                    speed = "-=25vw"; // Increase speed for mobile
                 }
-                $("#carousel").animate({ marginLeft: speed }, 500, "linear", function () {
+                $("#carousel").animate({ marginLeft: speed }, 350, "linear", function () {
+                    // move the first element to the end of the carousel
                 let currentSpace = parseFloat($("#carousel").css("margin-left")) / $(window).width() * 100; // Convert px to vw
                 if ($(window).width() <= 768) { // Check for mobile
                     console.log(currentSpace);
-                    if (currentSpace <= -140) { // Reset at -100vw for mobile
+
+                    if (currentSpace <= -150) { // Reset at -100vw for mobile
                         stopImg();
                     }
                 }
                 else {
-                    if (currentSpace <= -100) { // Reset at -50vw for larger screens
+                    if (currentSpace <= -90) { // Reset at -50vw for larger screens
                         stopImg();
                     }
                 }
@@ -121,28 +125,35 @@
         }
         
         $("#move").click(function() {
+            // start carousel
             if (inter == null) {
             moveImg();
             }
         });
 
         function stopImg() {
+            // find the current element in the carousel
             for (let i in elems) {
                 if ($("#carousel").children().first().html().replace(/\s+/g, '')==elems[i].replace(/\s+/g, '')) {
                     if (i!=2){
+                        // select the next element if it is not the last element
                         $("#carousel").children().first().children().remove();
                         $("#carousel").children().first().append(elems[parseInt(i)+1]);
                         $("#carousel").children().eq(1).children().remove();
                         if (i==1){
+                            // the second item that appears in the carousel is set to the first element on the last element
                             $("#carousel").children().eq(1).append(elems[0]);
                         }
                         else{
+                            // the second item that appears in the carousel is set to the third element on the last element
                             $("#carousel").children().eq(1).append(elems[2]);
                         }
                         // alert(i)
                         break
                     }
                     else{
+                        // if the last element is selected, set the first element to the first element in the carousel
+                        // and the second element to the second element in the carousel
                         $("#carousel").children().first().children().remove();
                         $("#carousel").children().first().append(elems[0]);
                         $("#carousel").children().eq(1).children().remove();
@@ -156,30 +167,31 @@
                 }
 
             }
-
+            // reset the carousel to the first element
             $("#carousel").css("margin-left", "0vw");
             $("#carousel").stop(true, true); // Stop the animation immediately
+            // clear the interval
             clearInterval(inter);
             inter = null;
         }
-
+        // CAD carousel Works the same as the web carousel except it uses a different set of elements
         function moveCADImg() {
             if (!CADinter) { // Prevent multiple intervals
             CADinter = setInterval(() => {
                 let speed = "-=15vw"
                 if ($(window).width() <= 768) { // Check for mobile
-                    speed = "-=20vw"; // Increase speed for mobile
+                    speed = "-=25vw"; // Increase speed for mobile
                 }
-                $("#CADcarousel").animate({ marginLeft: speed }, 500, "linear", function () {
+                $("#CADcarousel").animate({ marginLeft: speed }, 350, "linear", function () {
                 let currentSpace = parseFloat($("#CADcarousel").css("margin-left")) / $(window).width() * 100; // Convert px to vw
                 if ($(window).width() <= 768) { // Check for mobile
                     console.log(currentSpace);
-                    if (currentSpace <= -140) { // Reset at -100vw for mobile
+                    if (currentSpace <= -150) { // Reset at -100vw for mobile
                         stopCADImg();
                     }
                 }
                 else {
-                    if (currentSpace <= -100) { // Reset at -50vw for larger screens
+                    if (currentSpace <= -90) { // Reset at -50vw for larger screens
                         stopCADImg();
                     }
                 }
@@ -188,6 +200,8 @@
             }
         }
 
+        // this function is used to stop the carousel
+        //works the same as the stopImg function
         function stopCADImg() {
             for (let i in CADelems) {
                 if ($("#CADcarousel").children().first().html().replace(/\s+/g, '')==CADelems[i].replace(/\s+/g, '')) {
@@ -201,7 +215,6 @@
                         else{
                             $("#CADcarousel").children().eq(1).append(CADelems[2]);
                         }
-                        // alert(i)
                         break
                     }
                     else{
@@ -212,7 +225,6 @@
 
 
 
-                        // alert(i)
                         break
                     }
                 }
